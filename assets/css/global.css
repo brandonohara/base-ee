@@ -36,7 +36,15 @@ body {
 .clear {
 	clear: both;
 }
+.white {
+	color: #fff;
+}
 .testing {
 	width: 100%;
 	height: 600px;
+}
+#freeform_honeepot {
+	display: block !important;
+	left: -9999px !important;
+	position: absolute !important;
 }
