@@ -66,7 +66,8 @@
 		ee()->db->where("form_id", 1)->update("freeform_forms", $form);
 		
 		echo "Setup Complete.";
-	} else {
+	} else if(isset($_GET['site_id'])){
+		$site_id = $_GET['site_id'];
 		//check for previous setup
 		$query = ee()->db->from("upload_prefs")->get();
 		if($query->num_rows() > 0)
@@ -97,7 +98,7 @@
 		$uploads = array(
 			'site_id' => 1,
 			'name' => 'Uploads',
-			'server_path' => 'uploads/',
+			'server_path' => '/home/' . $site_id . '/public_html/uploads/',
 			'url' => $site_url.'uploads/',
 			'allowed_types' => 'all'
 		);
@@ -112,6 +113,12 @@
 		echo "<h3>Basic Setup Complete</h3>";
 		echo "<p>To setup plugins and modules, install them first in the control panel, and then click the button below.</p>";
 		echo "<a href='setup.php?plugins=yes'>Setup Plugins</a>";
+	} else {
+		echo "<form action='setup.php' method='GET'>";
+		echo "<h3>Enter the site username (after the ~).</h3>";
+		echo "<input type='text' name='site_id' />";
+		echo "<input type='submit' />";
+		echo "</form>";
 	}
 	
 	
